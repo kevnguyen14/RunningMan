@@ -1,44 +1,133 @@
 package com.cecs445.runningman.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Scenes.Hud;
+import com.cecs445.runningman.Sprites.Man;
 
 /**
  * Created by Kevin on 9/14/2016.
  */
 public class PlayScreen implements Screen{
     private RunningMan game;
+
+    //game world camera
     private OrthographicCamera gamecam;
+
+    //gameworld view
     private Viewport gamePort;
+
+    //creating hud
     private Hud hud;
 
+    //creating man
+    private Man man;
+
+    //tiled mape variables
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    //Box2d variables
+    private World world;
+    private Box2DDebugRenderer b2dr; //shows whats going on in box2d
 
     public PlayScreen(RunningMan game){
         this.game = game;
         //create came used to follow man through cam world
         gamecam = new OrthographicCamera();
+
         //create fitviewport to maintain virtual aspect ratio
-        gamePort = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, gamecam);
+        gamePort = new FitViewport(RunningMan.V_WIDTH/RunningMan.PPM, RunningMan.V_HEIGHT/RunningMan.PPM, gamecam);
+
         //create our game hud for scores timers etc
         hud = new Hud(game.batch);
-        //load map
+
+        //load map and setup our map renderer
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("level 1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1/RunningMan.PPM);
+
+        //initially set our gamecam to be center correctly at the start of the game
         gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
 
+        //creating the world
+        world = new World(new Vector2(0, -10), true); //sleep objects at rest true, 0,0 no gravity
+
+        //creating the line Box2D renderer for debugging
+        b2dr = new Box2DDebugRenderer();
+
+        //creating the running man
+        man = new Man(world);
+
+
+        //intitalizing box2d body, bdef and fdef
+        BodyDef bdef = new BodyDef();
+        PolygonShape shape = new PolygonShape();
+        FixtureDef fdef = new FixtureDef();
+        Body body;
+
+        //creating pipe bodies/fixtures
+        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        //creating ground body/fixtures
+        for(MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        //creating brick bodies/fixtures
+        for(MapObject object: map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
 
     }
 
@@ -48,12 +137,24 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isTouched())
-            gamecam.position.x += 100 * dt; //temporary
+//        if(Gdx.input.isTouched())
+//            gamecam.position.x += 100 * dt; //temporary
+//            player.b2Body.applyLinearImpulse(0, 4f, 0, 0, true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
+            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
+            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
     }
 
     public void update(float dt) {
         handleInput(dt);
+
+        world.step(1/60f, 6, 2);
+
+        //everytime man moves, track with game cam only on x axis
+        gamecam.position.x = man.b2body.getPosition().x;
 
         gamecam.update(); //updates cam after every user input
         renderer.setView(gamecam); //renders what our gamecam can see
@@ -61,14 +162,20 @@ public class PlayScreen implements Screen{
 
     @Override
     public void render(float delta) {
+        //separate our update logic from render
         update(delta);
 
-        // clears game screen
+        // clears game screen with black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render game map
         renderer.render(); //draws tile map
 
+        //renderer our Box2DDebugLines
+        b2dr.render(world, gamecam.combined);
+
+        //set our batch to now draw what the Hud camera sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }
