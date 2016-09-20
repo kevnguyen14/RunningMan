@@ -54,11 +54,12 @@ public class PlayScreen implements Screen{
     private Box2DDebugRenderer b2dr; //shows whats going on in box2d
 
     //inputhandler variable
-    private Vector3 touchPos, touchPos2;
+    private Vector3 touchPos;
 
     public PlayScreen(RunningMan game){
         this.game = game;
-        //create came used to follow man through cam world
+
+        //create cam used to follow man through cam world
         gamecam = new OrthographicCamera();
 
         //create fitviewport to maintain virtual aspect ratio
@@ -86,7 +87,6 @@ public class PlayScreen implements Screen{
 
         //creating toushpos
         touchPos = new Vector3();
-        touchPos2 = new Vector3();
 
         //intitalizing box2d body, bdef and fdef
         BodyDef bdef = new BodyDef();
@@ -144,42 +144,50 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(float dt){
-//        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-//            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
-//        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
-//            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
-//        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
-//            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
+            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
+            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
 
-        if(Gdx.input.isTouched(1) && man.b2body.getLinearVelocity().y == 0) {
-            //jump
-            if(Gdx.input.getX(1) >=1621  && Gdx.input.getX(1) <= 1815 && Gdx.input.getY(1) >= 740  && Gdx.input.getY(1) <=  935) {
-                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
-        }
 
-        if(Gdx.input.isTouched(0)) {
-//            touchPos.set(Gdx.input.getX(0), Gdx.input.getY(0), 0);
+        //controller inputs
+        if(hud.isRightPressed())
+            man.b2body.applyLinearImpulse(new Vector2(0.05f, 0), man.b2body.getWorldCenter(), true);
+        if(hud.isLeftPressed())
+            man.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), man.b2body.getWorldCenter(), true);
+        if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0)
+            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);
+
+//        if(Gdx.input.isTouched(1) && man.b2body.getLinearVelocity().y == 0) {
+//            //jump
+//            if(Gdx.input.getX(1) >=1621  && Gdx.input.getX(1) <= 1815 && Gdx.input.getY(1) >= 740  && Gdx.input.getY(1) <=  935) {
+//                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
+//        }
+//
+//        if(Gdx.input.isTouched(0)) {
+//            gamecam.unproject(touchPos.set(Gdx.input.getX(0), Gdx.input.getY(0), 0));
 //            Gdx.app.log("Touch pos X: ", touchPos.x + " " + "Touch pos Y: " + touchPos.y + " ");
-            //moving right touchscreen
-            if(Gdx.input.getX(0) >= 310 && Gdx.input.getX(0) <= 445 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x <= 2 )
-                man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
-            //moving left touchscreen
-            if(Gdx.input.getX(0) >= 70 && Gdx.input.getX(0) <= 220 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x >= -2)
-                man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
-            if(Gdx.input.getX(0) >=1621  && Gdx.input.getX(0) <= 1815 && Gdx.input.getY(0) >= 740  && Gdx.input.getY(0) <=  935 && man.b2body.getLinearVelocity().y == 0) {
-                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
-        }
+//            //moving right touchscreen
+//            if(Gdx.input.getX(0) >= 310 && Gdx.input.getX(0) <= 445 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x <= 2 )
+//                man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+//            //moving left touchscreen
+//            if(Gdx.input.getX(0) >= 70 && Gdx.input.getX(0) <= 220 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x >= -2)
+//                man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+//            if(Gdx.input.getX(0) >=1621  && Gdx.input.getX(0) <= 1815 && Gdx.input.getY(0) >= 740  && Gdx.input.getY(0) <=  935 && man.b2body.getLinearVelocity().y == 0) {
+//                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
+//        }
 
     }
 
     public void update(float dt) {
         handleInput(dt);
 
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
 
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;
-
         gamecam.update(); //updates cam after every user input
         renderer.setView(gamecam); //renders what our gamecam can see
     }
@@ -206,7 +214,9 @@ public class PlayScreen implements Screen{
 
     @Override
     public void resize(int width, int height) {
+
         gamePort.update(width, height);
+        hud.resize(width, height);
     }
 
     @Override
