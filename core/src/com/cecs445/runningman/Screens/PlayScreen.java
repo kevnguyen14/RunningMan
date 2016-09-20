@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -52,6 +53,9 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr; //shows whats going on in box2d
 
+    //inputhandler variable
+    private Vector3 touchPos, touchPos2;
+
     public PlayScreen(RunningMan game){
         this.game = game;
         //create came used to follow man through cam world
@@ -80,6 +84,9 @@ public class PlayScreen implements Screen{
         //creating the running man
         man = new Man(world);
 
+        //creating toushpos
+        touchPos = new Vector3();
+        touchPos2 = new Vector3();
 
         //intitalizing box2d body, bdef and fdef
         BodyDef bdef = new BodyDef();
@@ -137,15 +144,32 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(float dt){
-//        if(Gdx.input.isTouched())
-//            gamecam.position.x += 100 * dt; //temporary
-//            player.b2Body.applyLinearImpulse(0, 4f, 0, 0, true);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
-            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
-            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+//        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+//            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
+//        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
+//            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+//        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
+//            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+
+        if(Gdx.input.isTouched(1) && man.b2body.getLinearVelocity().y == 0) {
+            //jump
+            if(Gdx.input.getX(1) >=1621  && Gdx.input.getX(1) <= 1815 && Gdx.input.getY(1) >= 740  && Gdx.input.getY(1) <=  935) {
+                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
+        }
+
+        if(Gdx.input.isTouched(0)) {
+//            touchPos.set(Gdx.input.getX(0), Gdx.input.getY(0), 0);
+//            Gdx.app.log("Touch pos X: ", touchPos.x + " " + "Touch pos Y: " + touchPos.y + " ");
+            //moving right touchscreen
+            if(Gdx.input.getX(0) >= 310 && Gdx.input.getX(0) <= 445 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x <= 2 )
+                man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+            //moving left touchscreen
+            if(Gdx.input.getX(0) >= 70 && Gdx.input.getX(0) <= 220 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x >= -2)
+                man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+            if(Gdx.input.getX(0) >=1621  && Gdx.input.getX(0) <= 1815 && Gdx.input.getY(0) >= 740  && Gdx.input.getY(0) <=  935 && man.b2body.getLinearVelocity().y == 0) {
+                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
+        }
+
     }
 
     public void update(float dt) {
