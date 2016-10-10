@@ -11,9 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cecs445.runningman.RunningMan;
@@ -29,7 +31,8 @@ public class TitleScreen implements Screen{
     public boolean playTouch = false;
 
     public Viewport viewport;
-    public Label playLabel, exitLabel;
+    public Label exitLabel;
+    public Image playLabel;
     private Hud hud;
     public Stage stage;
     public TitleScreen(RunningMan game) {
@@ -38,7 +41,8 @@ public class TitleScreen implements Screen{
         //texture = new Texture("badlogic.jpg");
 
 
-        Label PlayLabel = new Label("Play", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        playLabel = new Image(new Texture("TitleScreen.jpg"));
+        playLabel.setScaling(Scaling.stretch);
         viewport = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
         Table table = new Table();
@@ -46,16 +50,18 @@ public class TitleScreen implements Screen{
         table.setFillParent(true);
         table.setTouchable(Touchable.enabled);
 
-        PlayLabel = new Label("Play", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
-        exitLabel = new Label("Exit", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
+        //PlayLabel = new Label("Play", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
+        //exitLabel = new Label("Exit", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
+        table.top();
+        table.add(playLabel);
 
-        table.add(PlayLabel).expandX().padTop(10);
-        Table table2 = new Table();
-        table2.bottom();
-        table2.setFillParent(true);
-        table2.add(exitLabel).expandX().padBottom(10);
+//        Table table2 = new Table();
+//        table2.bottom();
+//        table2.setFillParent(true);
+//        table2.add(exitLabel).expandX().padBottom(10);
+//        stage.addActor(table);
+//        stage.addActor(table2);
         stage.addActor(table);
-        stage.addActor(table2);
     }
 
     public void handleInput(float dt){
