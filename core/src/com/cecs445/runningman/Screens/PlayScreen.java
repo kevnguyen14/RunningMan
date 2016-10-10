@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -31,6 +32,7 @@ import com.cecs445.runningman.Sprites.Man;
  */
 public class PlayScreen implements Screen{
     private RunningMan game;
+    private TextureAtlas atlas;
 
     //game world camera
     private OrthographicCamera gamecam;
@@ -58,6 +60,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(RunningMan game){
         this.game = game;
+        atlas = new TextureAtlas("Runner.pack");
 
         Gdx.input.setCatchBackKey(true);
         //create cam used to follow man through cam world
@@ -84,7 +87,7 @@ public class PlayScreen implements Screen{
         b2dr = new Box2DDebugRenderer();
 
         //creating the running man
-        man = new Man(world);
+        man = new Man(world, this);
 
         //creating toushpos
         touchPos = new Vector3();
@@ -139,6 +142,10 @@ public class PlayScreen implements Screen{
 
     }
 
+    public TextureAtlas getAtlas(){
+        return atlas;
+    }
+
     @Override
     public void show() {
 
@@ -190,6 +197,8 @@ public class PlayScreen implements Screen{
 
         world.step(1 / 60f, 6, 2);
 
+        man.update(dt);
+
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;
         gamecam.update(); //updates cam after every user input
@@ -210,6 +219,11 @@ public class PlayScreen implements Screen{
 
         //renderer our Box2DDebugLines
         b2dr.render(world, gamecam.combined);
+
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        man.draw(game.batch);
+        game.batch.end();
 
         //set our batch to now draw what the Hud camera sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
