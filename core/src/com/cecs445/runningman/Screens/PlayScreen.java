@@ -59,6 +59,7 @@ public class PlayScreen implements Screen{
     public PlayScreen(RunningMan game){
         this.game = game;
 
+        Gdx.input.setCatchBackKey(true);
         //create cam used to follow man through cam world
         gamecam = new OrthographicCamera();
 
@@ -160,6 +161,9 @@ public class PlayScreen implements Screen{
         if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0)
             man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);
 
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new TitleScreen(this.game));
+        }
 //        if(Gdx.input.isTouched(1) && man.b2body.getLinearVelocity().y == 0) {
 //            //jump
 //            if(Gdx.input.getX(1) >=1621  && Gdx.input.getX(1) <= 1815 && Gdx.input.getY(1) >= 740  && Gdx.input.getY(1) <=  935) {
