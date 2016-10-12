@@ -55,9 +55,6 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr; //shows whats going on in box2d
 
-    //inputhandler variable
-    private Vector3 touchPos;
-
     public PlayScreen(RunningMan game){
         this.game = game;
         atlas = new TextureAtlas("Runner.pack");
@@ -74,7 +71,7 @@ public class PlayScreen implements Screen{
 
         //load map and setup our map renderer
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level 1.tmx");
+        map = mapLoader.load("level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/RunningMan.PPM);
 
         //initially set our gamecam to be center correctly at the start of the game
@@ -89,31 +86,28 @@ public class PlayScreen implements Screen{
         //creating the running man
         man = new Man(world, this);
 
-        //creating toushpos
-        touchPos = new Vector3();
-
         //intitalizing box2d body, bdef and fdef
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
 
-        //creating pipe bodies/fixtures
-        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
+//        //creating pipe bodies/fixtures
+//        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+//            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+//
+//            bdef.type = BodyDef.BodyType.StaticBody;
+//            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
+//
+//            body = world.createBody(bdef);
+//
+//            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
+//            fdef.shape = shape;
+//            body.createFixture(fdef);
+//        }
 
         //creating ground body/fixtures
-        for(MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object: map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -127,7 +121,7 @@ public class PlayScreen implements Screen{
         }
 
         //creating brick bodies/fixtures
-        for(MapObject object: map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -198,6 +192,9 @@ public class PlayScreen implements Screen{
         world.step(1 / 60f, 6, 2);
 
         man.update(dt);
+        // death beneath tile floors
+        if(man.getY() < 0)
+            game.setScreen(new TitleScreen(this.game));
 
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;
