@@ -124,13 +124,13 @@ public class Hud {
             }
         });
         Table table2 = new Table();
-        table2.bottom().left().padLeft(10); //top of screen
+        table2.bottom().left().padLeft(10).padBottom(20); //bottom left of screen
         table2.setFillParent(true); //size of our stage
         table2.add(leftImage).size(leftImage.getWidth(), leftImage.getHeight()).padRight(20);
         table2.add(rightImage).size(rightImage.getWidth(), rightImage.getHeight());
         stage.addActor(table2);
         Table table3 = new Table();
-        table3.bottom().right(); //top of screen
+        table3.bottom().right().padBottom(22); //bottom right of screen
         table3.setFillParent(true); //size of our stage
         table3.add(aImage).size(aImage.getWidth(), aImage.getHeight()).padRight(10);
         stage.addActor(table3);
