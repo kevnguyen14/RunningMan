@@ -85,7 +85,7 @@ public class PlayScreen implements Screen{
 
         //creating the running man
         man = new Man(world, this);
-
+        hud.setHealth(man.playerHealth);
         //intitalizing box2d body, bdef and fdef
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -121,7 +121,7 @@ public class PlayScreen implements Screen{
         }
 
         //creating brick bodies/fixtures
-        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+        for(MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -147,7 +147,7 @@ public class PlayScreen implements Screen{
 
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && man.b2body.getLinearVelocity().y == 0)
-            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
+            man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
             man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
@@ -160,7 +160,7 @@ public class PlayScreen implements Screen{
         if(hud.isLeftPressed())
             man.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), man.b2body.getWorldCenter(), true);
         if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0)
-            man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true);
 
         if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
             game.setScreen(new TitleScreen(this.game));
@@ -192,9 +192,12 @@ public class PlayScreen implements Screen{
         world.step(1 / 60f, 6, 2);
 
         man.update(dt);
+        hud.update(dt);
         // death beneath tile floors
-        if(man.getY() < 0)
+        if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
+            //set to game over screen
             game.setScreen(new TitleScreen(this.game));
+        }
 
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;

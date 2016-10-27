@@ -17,6 +17,7 @@ import com.cecs445.runningman.Screens.PlayScreen;
 public class Man extends Sprite{
     public World world;
     public Body b2body;
+    public int playerHealth;
     private TextureRegion runnerStand;
 
     public Man(World world, PlayScreen screen) {
@@ -38,10 +39,12 @@ public class Man extends Sprite{
         bdef.position.set(32 / RunningMan.PPM, 32/ RunningMan.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+        playerHealth = 50;
 
         FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(6/RunningMan.PPM, 16/RunningMan.PPM);
+        CircleShape shape = new CircleShape();
+        //shape.setAsBox(6/RunningMan.PPM, 8/RunningMan.PPM);
+        shape.setRadius(5/ RunningMan.PPM);
 //        CircleShape shape = new CircleShape();
 //        shape.setRadius(5 / RunningMan.PPM);
 
