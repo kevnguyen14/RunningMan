@@ -32,6 +32,7 @@ public class Hud {
     public Integer worldTimer;
     private float timeCount;
     public Integer health;
+    public boolean isSlowed = false;
 
     private boolean rightPressed, leftPressed, jumpPressed;
 
@@ -142,7 +143,11 @@ public class Hud {
             worldTimer--;
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
+            if(isSlowed){
+                worldTimer -=2;
+            }
         }
+
     }
 
     public void setHealth(int value){
@@ -155,6 +160,10 @@ public class Hud {
         health -= value;
         scoreLabel.setText(String.format("%02d", health));
 
+    }
+
+    public void isSlowed(){
+        isSlowed = !isSlowed;
     }
 
     public boolean isRightPressed() {

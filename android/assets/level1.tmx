@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="205">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="229">
  <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
   <image source="../../graphics/tiles/floor_tile_d.png" width="64" height="64"/>
  </tileset>
@@ -11,7 +11,7 @@
  </tileset>
  <layer name="tiles" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="ground">
@@ -52,11 +52,10 @@
   <object id="172" x="975.636" y="63.9091" width="16.7273" height="128"/>
   <object id="173" x="1025" y="144.091" width="222.727" height="15.8182"/>
   <object id="174" x="1023.45" y="63.9091" width="16.7273" height="80.1818"/>
-  <object id="175" x="1023.45" y="48.7273" width="80.2121" height="14.8182"/>
-  <object id="176" x="1599.82" y="15.5454" width="16.7273" height="144.545"/>
+  <object id="175" x="1023.45" y="48.3637" width="80.3939" height="15.1818"/>
+  <object id="176" x="1599.82" y="48.0909" width="16.7273" height="112"/>
   <object id="177" x="1359.82" y="144.273" width="256.727" height="15.8182"/>
   <object id="178" x="1295.64" y="112.091" width="16.7273" height="80.1818"/>
-  <object id="179" x="1072.36" y="96.0909" width="495.636" height="15.8182"/>
   <object id="180" x="1616.18" y="112.091" width="32" height="15.8182"/>
   <object id="181" x="1616.73" y="15" width="31.4546" height="97.0909"/>
   <object id="182" x="1648.36" y="15.1818" width="31.4546" height="64.7273"/>
@@ -65,7 +64,6 @@
   <object id="185" x="1711.91" y="96.0909" width="48.1818" height="15.8182"/>
   <object id="186" x="1744.27" y="64.4545" width="48.1818" height="15.8182"/>
   <object id="187" x="1776.27" y="48.4545" width="79.6363" height="15.8182"/>
-  <object id="188" x="1744.18" y="176" width="15.8182" height="15.4545"/>
   <object id="189" x="1679.91" y="144.455" width="15.8182" height="15.4545"/>
   <object id="190" x="1647.73" y="176.091" width="15.8182" height="15.4545"/>
   <object id="191" x="1711.91" y="112.455" width="15.8182" height="15.4545"/>
@@ -75,16 +73,31 @@
   <object id="196" x="1152.23" y="48.4242" width="62.8788" height="15.8182"/>
   <object id="198" x="1264.56" y="48.4242" width="62.8788" height="15.8182"/>
   <object id="199" x="1376.56" y="48.4242" width="62.8788" height="15.8182"/>
-  <object id="200" x="1488.23" y="48.4242" width="94.8788" height="15.8182"/>
+  <object id="200" x="1488.23" y="48.4242" width="111.424" height="15.8182"/>
+  <object id="206" x="1072.18" y="96.1818" width="47.6364" height="16"/>
+  <object id="210" x="1168.36" y="96.1818" width="47.6364" height="16"/>
+  <object id="211" x="1263.82" y="96" width="47.6364" height="16"/>
+  <object id="212" x="1359.82" y="96.1818" width="47.6364" height="16"/>
+  <object id="213" x="1456.18" y="96" width="47.6364" height="16"/>
+  <object id="219" x="1552" y="96" width="15.8182" height="16"/>
  </objectgroup>
- <objectgroup name="bricks"/>
  <objectgroup name="fire">
   <object id="201" x="1103.56" y="48.4242" width="48.8788" height="15.8182"/>
   <object id="202" x="1215.23" y="48.4242" width="48.8788" height="15.8182"/>
   <object id="203" x="1327.23" y="48.4242" width="48.8788" height="15.8182"/>
   <object id="204" x="1439.89" y="48.4242" width="48.8788" height="15.8182"/>
  </objectgroup>
- <objectgroup name="teleport"/>
+ <objectgroup name="teleport">
+  <object id="222" x="1600" y="15.6364" width="16.5455" height="32.5455"/>
+  <object id="225" x="1696.18" y="160.182" width="16" height="31.4545"/>
+ </objectgroup>
  <objectgroup name="key"/>
  <objectgroup name="door"/>
+ <objectgroup name="slow">
+  <object id="214" x="1504" y="96" width="47.6364" height="16"/>
+  <object id="215" x="1408" y="96.1818" width="47.6364" height="16"/>
+  <object id="216" x="1311.82" y="96.1818" width="47.6364" height="16"/>
+  <object id="217" x="1216" y="96.1818" width="47.6364" height="16"/>
+  <object id="218" x="1120.18" y="96.1818" width="47.6364" height="16"/>
+ </objectgroup>
 </map>

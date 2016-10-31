@@ -26,6 +26,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Scenes.Hud;
 import com.cecs445.runningman.Sprites.Man;
+import com.cecs445.runningman.Tools.BoxWorldCreator;
+import com.cecs445.runningman.Tools.worldContactListener;
 
 /**
  * Created by Kevin on 9/14/2016.
@@ -87,10 +89,7 @@ public class PlayScreen implements Screen{
         man = new Man(world, this);
         hud.setHealth(man.playerHealth);
         //intitalizing box2d body, bdef and fdef
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+        BoxWorldCreator boxWorldCreator = new BoxWorldCreator(world, map, man, hud);
 
 //        //creating pipe bodies/fixtures
 //        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
@@ -107,32 +106,11 @@ public class PlayScreen implements Screen{
 //        }
 
         //creating ground body/fixtures
-        for(MapObject object: map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
 
-            body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
 
-        //creating brick bodies/fixtures
-        for(MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2)/RunningMan.PPM, (rect.getY() + rect.getHeight() / 2)/RunningMan.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2/RunningMan.PPM, rect.getHeight()/2/RunningMan.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
+        world.setContactListener(new worldContactListener());
 
     }
 
@@ -159,8 +137,10 @@ public class PlayScreen implements Screen{
             man.b2body.applyLinearImpulse(new Vector2(0.05f, 0), man.b2body.getWorldCenter(), true);
         if(hud.isLeftPressed())
             man.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), man.b2body.getWorldCenter(), true);
-        if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0)
+        if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0) {
             man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true);
+            man.damageTrigger();
+        }
 
         if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
             game.setScreen(new TitleScreen(this.game));
@@ -193,6 +173,7 @@ public class PlayScreen implements Screen{
 
         man.update(dt);
         hud.update(dt);
+        hud.setHealth(man.playerHealth);
         // death beneath tile floors
         if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
             //set to game over screen

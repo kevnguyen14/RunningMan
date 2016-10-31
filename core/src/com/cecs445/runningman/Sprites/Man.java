@@ -19,6 +19,8 @@ public class Man extends Sprite{
     public Body b2body;
     public int playerHealth;
     private TextureRegion runnerStand;
+    private boolean onFire = false;
+    private float timer = 0;
 
     public Man(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("runner-frame"));
@@ -28,10 +30,16 @@ public class Man extends Sprite{
         setBounds(0,0,16/RunningMan.PPM, 16 * (114/49) /RunningMan.PPM);
         setRegion(runnerStand);
 
+
     }
 
     public void update(float dt){
+        timer += dt;
         setPosition(b2body.getPosition().x - getWidth()/2,(b2body.getPosition().y)- getHeight()/4);
+        if (onFire && timer > 1){
+            playerHealth--;
+            timer = 0;
+        }
     }
 
     public void defineMan(){
@@ -49,7 +57,11 @@ public class Man extends Sprite{
 //        shape.setRadius(5 / RunningMan.PPM);
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("player");
 
+    }
+
+    public void damageTrigger(){
+        onFire = !onFire;
     }
 }
