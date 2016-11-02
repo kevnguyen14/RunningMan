@@ -51,7 +51,7 @@ public class BoxWorldCreator {
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Swamp(world, map, rect, hud);
+            new Swamp(world, map, rect, man);
         }
 
 //        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {

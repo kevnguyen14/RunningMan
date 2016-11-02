@@ -12,20 +12,20 @@ import com.cecs445.runningman.Scenes.Hud;
  * Created by Christian on 10/31/2016.
  */
 public class Swamp extends InteractiveTileObject {
-    public Hud hud;
-    public Swamp(World world, TiledMap map, Rectangle bounds, Hud hud) {
+    public Man man;
+    public Swamp(World world, TiledMap map, Rectangle bounds, Man man) {
         super(world, map, bounds);
         fixture.setUserData(this);
-        this.hud = hud;
+        this.man = man;
     }
 
     @Override
     public void onPlayerContact() {
-        hud.isSlowed();
+        man.slowTrigger();
     }
 
     @Override
     public void onContactEnd() {
-        hud.isSlowed();
+        man.slowTrigger();
     }
 }

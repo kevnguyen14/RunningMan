@@ -127,16 +127,16 @@ public class PlayScreen implements Screen{
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && man.b2body.getLinearVelocity().y == 0)
             man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
-            man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
-            man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(-man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
 
 
         //controller inputs
         if(hud.isRightPressed())
-            man.b2body.applyLinearImpulse(new Vector2(0.05f, 0), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
         if(hud.isLeftPressed())
-            man.b2body.applyLinearImpulse(new Vector2(-0.05f, 0), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(-man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
         if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0) {
             man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true);
             man.damageTrigger();

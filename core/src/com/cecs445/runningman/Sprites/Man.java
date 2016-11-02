@@ -18,9 +18,13 @@ public class Man extends Sprite{
     public World world;
     public Body b2body;
     public int playerHealth;
+    public float movementSpeed = 0.1f;
+    public float jumpPower = 3.5f;
+    public boolean isSlowed = false;
     private TextureRegion runnerStand;
     private boolean onFire = false;
     private float timer = 0;
+
 
     public Man(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("runner-frame"));
@@ -61,7 +65,20 @@ public class Man extends Sprite{
 
     }
 
-    public void damageTrigger(){
-        onFire = !onFire;
+    public void slowTrigger(){
+        if (!isSlowed){
+            movementSpeed /= 2;
+        }else{
+            movementSpeed *= 2;
+        }
+        isSlowed = !isSlowed;
     }
+
+    public void SpeedPower(){}
+
+    public void JumpPower(){}
+
+    public void HealthPower(){}
+
+    public void damageTrigger(){onFire = !onFire;}
 }
