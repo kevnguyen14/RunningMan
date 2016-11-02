@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Scenes.Hud;
-import com.sun.javafx.scene.traversal.Hueristic2D;
+
 
 /**
  * Created by Christian on 10/3/2016.

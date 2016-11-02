@@ -29,9 +29,10 @@ public class Hud {
     private Viewport viewport;
     public OrthographicCamera hudCam;
 
-    private Integer worldTimer;
+    public Integer worldTimer;
     private float timeCount;
-    private Integer score;
+    public Integer health;
+    public boolean isSlowed = false;
 
     private boolean rightPressed, leftPressed, jumpPressed;
 
@@ -40,7 +41,7 @@ public class Hud {
     public Hud(SpriteBatch sb){
         worldTimer = 300;
         timeCount = 0;
-        score = 0;
+        health = 0;
 
         hudCam = new OrthographicCamera();
         viewport = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, hudCam);
@@ -52,7 +53,7 @@ public class Hud {
         table.setFillParent(true); //size of our stage
 
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("Health: %02d", health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         currentLevelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -124,16 +125,45 @@ public class Hud {
             }
         });
         Table table2 = new Table();
-        table2.bottom().left().padLeft(10); //top of screen
+        table2.bottom().left().padLeft(10).padBottom(20); //bottom left of screen
         table2.setFillParent(true); //size of our stage
         table2.add(leftImage).size(leftImage.getWidth(), leftImage.getHeight()).padRight(20);
         table2.add(rightImage).size(rightImage.getWidth(), rightImage.getHeight());
         stage.addActor(table2);
         Table table3 = new Table();
-        table3.bottom().right(); //top of screen
+        table3.bottom().right().padBottom(22); //bottom right of screen
         table3.setFillParent(true); //size of our stage
         table3.add(aImage).size(aImage.getWidth(), aImage.getHeight()).padRight(10);
         stage.addActor(table3);
+    }
+
+    public void update(float dt){
+        timeCount += dt;
+        if(timeCount >= 1){
+            worldTimer--;
+            countdownLabel.setText(String.format("%03d", worldTimer));
+            timeCount = 0;
+            if(isSlowed){
+                worldTimer -=2;
+            }
+        }
+
+    }
+
+    public void setHealth(int value){
+        health = value;
+        scoreLabel.setText(String.format("Health: %02d", health));
+
+    }
+
+    public void loseHealth(int value){
+        health -= value;
+        scoreLabel.setText(String.format("%02d", health));
+
+    }
+
+    public void isSlowed(){
+        isSlowed = !isSlowed;
     }
 
     public boolean isRightPressed() {
