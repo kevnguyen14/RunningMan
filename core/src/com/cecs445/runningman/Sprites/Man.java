@@ -2,6 +2,7 @@ package com.cecs445.runningman.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -24,6 +25,7 @@ public class Man extends Sprite{
     private TextureRegion runnerStand;
     private boolean onFire = false;
     private float timer = 0;
+    public boolean hasKey = false;
 
 
     public Man(World world, PlayScreen screen) {
@@ -59,6 +61,8 @@ public class Man extends Sprite{
         shape.setRadius(5/ RunningMan.PPM);
 //        CircleShape shape = new CircleShape();
 //        shape.setRadius(5 / RunningMan.PPM);
+        fdef.filter.categoryBits = RunningMan.ManBit;
+        fdef.filter.maskBits = RunningMan.DefaultBit;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData("player");
@@ -72,6 +76,10 @@ public class Man extends Sprite{
             movementSpeed *= 2;
         }
         isSlowed = !isSlowed;
+    }
+
+    public void manReset(){
+        b2body.setTransform(new Vector2(0,0), b2body.getAngle());
     }
 
     public void SpeedPower(){}

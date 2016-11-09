@@ -14,6 +14,12 @@ public class RunningMan extends Game {
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 100; //pixels per meter
 
+	public static final short DefaultBit = 1;
+	public static final short ManBit = 2;
+	public static final short DestroyedBit = 4;
+
+
+
 	public SpriteBatch batch;
 
 	@Override

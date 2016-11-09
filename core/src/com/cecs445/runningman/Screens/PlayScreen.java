@@ -89,7 +89,7 @@ public class PlayScreen implements Screen{
         man = new Man(world, this);
         hud.setHealth(man.playerHealth);
         //intitalizing box2d body, bdef and fdef
-        BoxWorldCreator boxWorldCreator = new BoxWorldCreator(world, map, man, hud);
+        BoxWorldCreator boxWorldCreator = new BoxWorldCreator(world, map, man, hud, this.game);
 
 //        //creating pipe bodies/fixtures
 //        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){

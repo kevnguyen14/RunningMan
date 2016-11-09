@@ -39,7 +39,7 @@ public class Hud {
     Label countdownLabel, scoreLabel, timeLabel, levelLabel, currentLevelLabel, manLabel, blankLabel;
 
     public Hud(SpriteBatch sb){
-        worldTimer = 300;
+        worldTimer = 90;
         timeCount = 0;
         health = 0;
 

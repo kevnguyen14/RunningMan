@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="255">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="259">
  <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
   <image source="../../graphics/tiles/floor_tile_d.png" width="64" height="64"/>
  </tileset>
@@ -12,7 +12,7 @@
  <tileset firstgid="295" name="obstacles" tilewidth="16" tileheight="16" tilecount="1" columns="1">
   <image source="graphics/obstacle/fire.png" width="16" height="20"/>
  </tileset>
- <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="5" columns="0">
+ <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="6" columns="0">
   <tile id="0">
    <image width="16" height="16" source="graphics/pickup/health.png"/>
   </tile>
@@ -28,16 +28,22 @@
   <tile id="4">
    <image width="32" height="26" source="graphics/portal/key.png"/>
   </tile>
+  <tile id="5">
+   <image width="16" height="13" source="graphics/pickup/key.png"/>
+  </tile>
  </tileset>
- <tileset firstgid="301" name="warp" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+ <tileset firstgid="302" name="warp" tilewidth="16" tileheight="16" tilecount="16" columns="4">
   <image source="graphics/portal/portal.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="317" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+ <tileset firstgid="318" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16" columns="4">
   <image source="graphics/portal/portal-lock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="334" name="quicksand" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+  <image source="graphics/tiles/quicksand.png" width="64" height="64"/>
  </tileset>
  <layer name="tiles" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="ground">
@@ -108,6 +114,8 @@
   <object id="252" x="2322" y="160" width="78.5" height="14.5"/>
   <object id="253" x="2351.5" y="143.5" width="64" height="16"/>
   <object id="254" x="2385.5" y="127.5" width="31.5" height="16.5"/>
+  <object id="255" x="656" y="145" width="16" height="47"/>
+  <object id="256" x="689" y="160" width="16" height="29"/>
  </objectgroup>
  <objectgroup name="fire">
   <object id="201" x="1103.56" y="48.4242" width="48.8788" height="15.8182"/>
@@ -128,7 +136,7 @@
   <object id="231" x="2449.5" y="66" width="31.5" height="61.5"/>
  </objectgroup>
  <objectgroup name="key">
-  <object id="233" x="917.5" y="67.5" width="25" height="27"/>
+  <object id="258" x="914" y="82" width="13" height="11"/>
  </objectgroup>
  <objectgroup name="door">
   <object id="232" x="2848.5" y="128.5" width="31" height="62.5"/>
@@ -143,7 +151,7 @@
  </objectgroup>
  <layer name="pickups" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt2o0KAUEQwPG7F7jXIERRFEVRFO//PuaKsNbd7LW316z/r7ZzzI2PnbGrFAUAoKtx+Xk+Kl8jBjef79yN117XlAf4B5ME/as5hsa35UE6ITUzLdtvx+TWd9+aPos+HnuP0caG0K6bvqPvuqa8mucHcha71odeb+cSt6B/0dHMWN3ErvOQ37HadflXHp+l3L+if9GBxb2bpdeqsZb3szE2B/hmrY8Qx1bmfMfcAyZUj/GUYg+0l9wHvh+yYHHPnIPKGSkdZa5PzHev3P8pIA9u36bu3dpZautCfQFqvr4dondrV+ndG/0LwJA7QIMZ0A==
+   eJzt2o0KAUEQwPG7F7jXIBJFURRFUbz/85grwlp3s9feXrP+v9rOMTc+dsauUhQAgK7G5ef5qHyNGNx8vnM3XntdUx7gH0wS9K/mGBrflgfphNTMtGy/HZNb331r+iz6eOw9RhsbQrtu+o6+65ryap4fyFnsWh96vZ1L3IL+RUczY3UTu85Dfsdq1+VfeXyWcv+K/kUHFvdull6rxlrez8bYHOCbtT5CHFuZ8x1zD5hQPcZTij3QXnIf+H7IgsU9cw4qZ6R0lLk+Md+9cv+ngDy4fZu6d2tnqa0L9QWo+fp2iN6tXaV3b/QvAEPufi4Z4Q==
   </data>
  </layer>
  <objectgroup name="health">
