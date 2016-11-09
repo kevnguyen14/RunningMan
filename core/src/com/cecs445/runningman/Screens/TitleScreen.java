@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,56 +28,123 @@ import com.cecs445.runningman.Scenes.Hud;
  */
 public class TitleScreen implements Screen{
     private RunningMan game;
-    Texture texture;
-    public boolean playTouch = false;
-
     public Viewport viewport;
-    public Label exitLabel;
-    public Image playLabel;
-    private Hud hud;
     public Stage stage;
+    private Texture bg;
+    private boolean playPressed, connectPressed, exitPressed;
     public TitleScreen(RunningMan game) {
         this.game = game;
-
-        //texture = new Texture("badlogic.jpg");
-
-
-        playLabel = new Image(new Texture("TitleScreen.jpg"));
-        playLabel.setScaling(Scaling.stretch);
+        Table table = new Table();
         viewport = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport);
-        Table table = new Table();
+        Gdx.input.setInputProcessor(stage);
+
+        //making background
+        bg = new Texture("graphics\\bg\\bgresized.jpg");
+
+        //making banner
+        Image banner = new Image(new Texture("graphics\\banner\\banner.png"));
+//        banner.setSize(30, 30);
+        banner.setScaling(Scaling.stretch);
+
         table.top();
         table.setFillParent(true);
-        table.setTouchable(Touchable.enabled);
+        table.padRight(10).padLeft(10).padTop(10).padBottom(10);
+//        table.setTouchable(Touchable.enabled);
+        table.add(banner);
 
-        //PlayLabel = new Label("Play", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
-        //exitLabel = new Label("Exit", new Label.LabelStyle(new BitmapFont(),Color.WHITE));
-        table.top();
-        table.add(playLabel);
+        //making play
+        Image play = new Image(new Texture("graphics\\buttons\\playbutton.png"));
+        banner.setScaling(Scaling.fit);
+        play.setTouchable(Touchable.enabled);
+        play.addListener(new InputListener() {
 
-//        Table table2 = new Table();
-//        table2.bottom();
-//        table2.setFillParent(true);
-//        table2.add(exitLabel).expandX().padBottom(10);
-//        stage.addActor(table);
-//        stage.addActor(table2);
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                playPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                playPressed = false;
+            }
+        });
+        table.row();
+        table.center();
+        table.setFillParent(true);
+        table.add(play).padBottom(5);
+
+        //making connect
+        Image connect = new Image(new Texture("graphics\\buttons\\connectbutton.png"));
+        banner.setScaling(Scaling.fit);
+        connect.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                connectPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                connectPressed = false;
+            }
+        });
+        table.row();
+        table.center();
+        table.setFillParent(true);
+        table.add(connect).padBottom(5);
+
+        //making exit
+        Image exit = new Image(new Texture("graphics\\buttons\\exitbutton.png"));
+        banner.setScaling(Scaling.fit);
+        exit.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                exitPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                exitPressed = false;
+            }
+        });
+        table.row();
+        table.center();
+        table.setFillParent(true);
+        table.add(exit).padBottom(5);
+
         stage.addActor(table);
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isTouched()){
-            float y = Gdx.input.getY();
-            if (y < (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3))){
-                game.setScreen(new PlayScreen(this.game));
-            }
-            if (y > (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3)) && y < (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
+//        if(Gdx.input.isTouched()){
+//            float y = Gdx.input.getY();
+//            if (y < (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3))){
 //                game.setScreen(new PlayScreen(this.game));
-            }
-            if (y > (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
-                System.exit(0);
-            }
-        }
+//            }
+//            if (y > (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3)) && y < (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
+////                game.setScreen(new PlayScreen(this.game));
+//            }
+//            if (y > (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
+//                System.exit(0);
+//            }
+//        }
+
+        //play button
+        if(isPlayPressed())
+            game.setScreen(new PlayScreen(this.game));
+        //connect button
+        /**
+         * Hilario code for sign in api
+         */
+        //exit button
+        if(isExitPressed())
+            System.exit(0);
+
     }
 
     public void update(float dt) {
@@ -96,13 +164,11 @@ public class TitleScreen implements Screen{
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(stage.getCamera().view);
+        stage.act(delta);
+        stage.getBatch().begin();
+        stage.getBatch().draw(bg, 0, 0, RunningMan.V_WIDTH, RunningMan.V_HEIGHT);
+        stage.getBatch().end();
         stage.draw();
-//        Gdx.gl.glClearColor(1,0,0,1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        game.batch.begin();
-//        game.batch.draw(texture,0,0);
-//        game.batch.end();
-
     }
 
     @Override
@@ -128,5 +194,17 @@ public class TitleScreen implements Screen{
     @Override
     public void dispose() {
 
+    }
+
+    public boolean isPlayPressed(){
+        return playPressed;
+    }
+
+    public boolean isExitPressed(){
+        return exitPressed;
+    }
+
+    public boolean isConnectPressed(){
+        return connectPressed;
     }
 }
