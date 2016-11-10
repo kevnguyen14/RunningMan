@@ -17,7 +17,7 @@ import com.cecs445.runningman.Screens.PlayScreen;
  */
 public class Man extends Sprite{
     public World world;
-    public Body b2body;
+    public static Body b2body;
     public int playerHealth;
     public float movementSpeed = 0.1f;
     public float jumpPower = 3.5f;
@@ -78,8 +78,18 @@ public class Man extends Sprite{
         isSlowed = !isSlowed;
     }
 
+//        public void slowTrigger(){
+//        if (isSlowed){
+//            movementSpeed = 0.05f;
+//        }else{
+//            movementSpeed = 0.1f;
+//        }
+//    }
+
     public void manReset(){
-        b2body.setTransform(new Vector2(0,0), b2body.getAngle());
+
+        b2body.setTransform(new Vector2(32 / RunningMan.PPM, 32/ RunningMan.PPM), b2body.getAngle());
+
     }
 
     public void SpeedPower(){}

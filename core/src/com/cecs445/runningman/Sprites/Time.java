@@ -15,6 +15,7 @@ public class Time extends InteractiveTileObject {
     public Time(World world, TiledMap map, Rectangle bounds, Hud hud) {
         super(world, map, bounds);
         fixture.setUserData(this);
+        fixture.setSensor(true);
         this.hud = hud;
     }
 

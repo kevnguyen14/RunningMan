@@ -138,7 +138,7 @@ public class PlayScreen implements Screen{
         if(hud.isLeftPressed())
             man.b2body.applyLinearImpulse(new Vector2(-man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
         if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0) {
-            man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true);
+            man.b2body.applyLinearImpulse(new Vector2(0, man.jumpPower), man.b2body.getWorldCenter(), true);
             man.damageTrigger();
         }
 

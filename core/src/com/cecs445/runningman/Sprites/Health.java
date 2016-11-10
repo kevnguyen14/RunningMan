@@ -15,6 +15,7 @@ public class Health extends InteractiveTileObject {
     public Health(World world, TiledMap map, Rectangle bounds, Man man) {
         super(world, map, bounds);
         fixture.setUserData(this);
+        fixture.setSensor(true);
         this.man = man;
     }
 

@@ -21,11 +21,13 @@ public class Swamp extends InteractiveTileObject {
 
     @Override
     public void onPlayerContact() {
+//        man.isSlowed = true;
         man.slowTrigger();
     }
 
     @Override
     public void onContactEnd() {
+//        man.isSlowed = false;
         man.slowTrigger();
     }
 }

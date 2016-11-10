@@ -14,6 +14,7 @@ public class Speed extends InteractiveTileObject {
     public Speed(World world, TiledMap map, Rectangle bounds, Man man) {
         super(world, map, bounds);
         fixture.setUserData(this);
+        fixture.setSensor(true);
         this.man = man;
     }
 

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="259">
- <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
+ <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9">
   <image source="../../graphics/tiles/floor_tile_d.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="10" name="bricks" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
+ <tileset firstgid="10" name="bricks" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9">
   <image source="../../graphics/tiles/floor_tile_bd.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="19" name="bg" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="276" columns="23">
+ <tileset firstgid="19" name="bg" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="276">
   <image source="../../graphics/bg/bgresized.jpg" width="416" height="221"/>
  </tileset>
- <tileset firstgid="295" name="obstacles" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+ <tileset firstgid="295" name="obstacles" tilewidth="16" tileheight="16" tilecount="1">
   <image source="graphics/obstacle/fire.png" width="16" height="20"/>
  </tileset>
- <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="6" columns="0">
+ <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="6">
   <tile id="0">
    <image width="16" height="16" source="graphics/pickup/health.png"/>
   </tile>
@@ -26,19 +26,19 @@
    <image width="10" height="16" source="graphics/pickup/time.png"/>
   </tile>
   <tile id="4">
-   <image width="32" height="26" source="graphics/portal/key.png"/>
+   <image width="16" height="13" source="graphics/portal/key.png"/>
   </tile>
   <tile id="5">
    <image width="16" height="13" source="graphics/pickup/key.png"/>
   </tile>
  </tileset>
- <tileset firstgid="302" name="warp" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+ <tileset firstgid="302" name="warp" tilewidth="16" tileheight="16" tilecount="16">
   <image source="graphics/portal/portal.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="318" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+ <tileset firstgid="318" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16">
   <image source="graphics/portal/portal-lock.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="334" name="quicksand" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+ <tileset firstgid="334" name="quicksand" tilewidth="16" tileheight="16" tilecount="16">
   <image source="graphics/tiles/quicksand.png" width="64" height="64"/>
  </tileset>
  <layer name="tiles" width="240" height="13">
@@ -132,7 +132,6 @@
  <objectgroup name="teleport">
   <object id="222" x="1600" y="15.6364" width="16.5455" height="32.5455"/>
   <object id="225" x="1696.18" y="160.182" width="16" height="31.4545"/>
-  <object id="230" x="945" y="192" width="31" height="15.5"/>
   <object id="231" x="2449.5" y="66" width="31.5" height="61.5"/>
  </objectgroup>
  <objectgroup name="key">
@@ -140,7 +139,6 @@
  </objectgroup>
  <objectgroup name="door">
   <object id="232" x="2848.5" y="128.5" width="31" height="62.5"/>
-  <object id="242" x="386" y="302"/>
  </objectgroup>
  <objectgroup name="slow">
   <object id="214" x="1504" y="96" width="47.6364" height="16"/>
