@@ -2,6 +2,7 @@ package com.cecs445.runningman.Sprites;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -18,7 +19,6 @@ public class Jump extends InteractiveTileObject {
     @Override
     public void onPlayerContact() {
         getCell().setTile(null);
-
     }
 
     @Override
