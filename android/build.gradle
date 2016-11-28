@@ -112,8 +112,8 @@ idea {
         }
     }
 }
-dependencies {
-    compile 'com.google.firebase:firebase-auth:9.8.0'
-}
-apply plugin:
-        'com.google.gms.google-services'
+//dependencies {
+   // compile 'com.google.firebase:firebase-auth:9.8.0'
+//}
+//apply plugin:
+        //'com.google.gms.google-services'
