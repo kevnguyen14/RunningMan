@@ -57,7 +57,7 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr; //shows whats going on in box2d
 
-    public PlayScreen(RunningMan game){
+    public PlayScreen(RunningMan game, int level){
         this.game = game;
         atlas = new TextureAtlas("Runner.pack");
 
@@ -73,7 +73,16 @@ public class PlayScreen implements Screen{
 
         //load map and setup our map renderer
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1.tmx");
+
+        switch(level){
+            case 1:
+                map = mapLoader.load("level1.tmx");
+                break;
+            case 2:
+                map = mapLoader.load("level2.tmx");
+                break;
+        }
+
         renderer = new OrthogonalTiledMapRenderer(map, 1/RunningMan.PPM);
 
         //initially set our gamecam to be center correctly at the start of the game

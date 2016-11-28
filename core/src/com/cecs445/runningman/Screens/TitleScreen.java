@@ -136,7 +136,7 @@ public class TitleScreen implements Screen{
 
         //play button
         if(isPlayPressed())
-            game.setScreen(new PlayScreen(this.game));
+            game.setScreen(new LevelScreen(this.game));
         //connect button
         /**
          * Hilario code for sign in api
