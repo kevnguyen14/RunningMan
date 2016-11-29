@@ -25,9 +25,9 @@ public class Hud {
     private Viewport viewport;
     public OrthographicCamera hudCam;
 
-    public Integer worldTimer;
+    public static Integer worldTimer;
     private float timeCount;
-    public Integer health;
+    public static Integer health;
     public boolean isSlowed = false;
 
     private boolean rightPressed, leftPressed, jumpPressed;
@@ -143,7 +143,6 @@ public class Hud {
                 worldTimer -=2;
             }
         }
-
     }
 
     public void setHealth(int value){
@@ -176,5 +175,13 @@ public class Hud {
 
     public void resize(int width, int height){
         viewport.update(width, height);
+    }
+
+    public static Integer getWorldTimer() {
+        return worldTimer;
+    }
+
+    public void destroyHud() {
+        stage.dispose();
     }
 }

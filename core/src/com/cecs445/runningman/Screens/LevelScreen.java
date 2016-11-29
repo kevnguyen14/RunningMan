@@ -25,14 +25,19 @@ public class LevelScreen implements Screen{
     public Stage myStage;
     private Viewport views;
     public OrthographicCamera myCam;
+    private Texture bg;
+    private static int level;
 
     private boolean onePress, twoPress,threePress, fourPress, fivePress, sixPress, exitPress;
 
     public LevelScreen (RunningMan game) {
         this.game = game;
+        //making background
+        bg = new Texture("graphics\\bg\\bgresized.jpg");
         myCam = new OrthographicCamera();
         views = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, myCam);
         myStage = new Stage(views);
+        level = 0;
         Gdx.input.setInputProcessor(myStage);
 
         Image levelOneImage = new Image(new Texture("1.png"));
@@ -174,6 +179,10 @@ public class LevelScreen implements Screen{
         update(delta);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(myStage.getCamera().view);
+        myStage.act(delta);
+        myStage.getBatch().begin();
+        myStage.getBatch().draw(bg, 0, 0, RunningMan.V_WIDTH, RunningMan.V_HEIGHT);
+        myStage.getBatch().end();
         myStage.draw();
     }
 
@@ -188,11 +197,13 @@ public class LevelScreen implements Screen{
         }
 
         if (onePress) {
-            game.setScreen(new PlayScreen(this.game,1));
+            level = 1;
+            game.setScreen(new PlayScreen(this.game,level));
         }
 
         if(twoPress == true) {
-            game.setScreen(new PlayScreen(this.game,2));
+            level = 2;
+            game.setScreen(new PlayScreen(this.game,level));
         }
 
         //Crashes the game when this button is pressed
@@ -258,6 +269,10 @@ public class LevelScreen implements Screen{
     public boolean isBackPress() {
 
         return exitPress;
+    }
+
+    public static int getLevel() {
+        return level;
     }
 }
 

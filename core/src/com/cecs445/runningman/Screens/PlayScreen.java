@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cecs445.runningman.RunningMan;
+import com.cecs445.runningman.Scenes.EndHud;
 import com.cecs445.runningman.Scenes.Hud;
 import com.cecs445.runningman.Sprites.Man;
 import com.cecs445.runningman.Tools.BoxWorldCreator;
@@ -44,6 +45,7 @@ public class PlayScreen implements Screen{
 
     //creating hud
     private Hud hud;
+    private EndHud endHud;
 
     //creating man
     private Man man;
@@ -59,7 +61,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(RunningMan game, int level){
         this.game = game;
-        atlas = new TextureAtlas("Runner.pack");
+        atlas = new TextureAtlas("Man.pack");
 
         Gdx.input.setCatchBackKey(true);
         //create cam used to follow man through cam world
@@ -70,6 +72,7 @@ public class PlayScreen implements Screen{
 
         //create our game hud for scores timers etc
         hud = new Hud(game.batch);
+        endHud = new EndHud(game.batch);
 
         //load map and setup our map renderer
         mapLoader = new TmxMapLoader();
@@ -175,6 +178,11 @@ public class PlayScreen implements Screen{
 
     }
 
+    public void deathHandler() {
+        if(Gdx.input.justTouched())
+            game.setScreen(new TitleScreen(this.game));
+    }
+
     public void update(float dt) {
         handleInput(dt);
 
@@ -186,7 +194,9 @@ public class PlayScreen implements Screen{
         // death beneath tile floors
         if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
             //set to game over screen
-            game.setScreen(new TitleScreen(this.game));
+//            game.setScreen(new TitleScreen(this.game));
+            hud.destroyHud();
+            deathHandler();
         }
 
         //everytime man moves, track with game cam only on x axis
@@ -218,6 +228,10 @@ public class PlayScreen implements Screen{
         //set our batch to now draw what the Hud camera sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+        if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
+            endHud.stage.draw();
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cecs445.runningman.RunningMan;
+import com.cecs445.runningman.Screens.LevelCompleteScreen;
 import com.cecs445.runningman.Screens.TitleScreen;
 
 /**
@@ -25,7 +26,7 @@ public class Door extends InteractiveTileObject{
     @Override
     public void onPlayerContact() {
         if (man.hasKey){
-            game.setScreen(new TitleScreen(this.game));
+            game.setScreen(new LevelCompleteScreen(this.game));
         }
     }
 
