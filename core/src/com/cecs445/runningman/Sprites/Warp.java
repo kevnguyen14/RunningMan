@@ -13,6 +13,7 @@ import com.cecs445.runningman.Screens.PlayScreen;
  */
 public class Warp extends InteractiveTileObject {
     public Man man;
+    public static boolean portal;
     public Warp(World world, TiledMap map, Rectangle bounds, Man man) {
         super(world, map, bounds);
         fixture.setUserData(this);
@@ -22,7 +23,6 @@ public class Warp extends InteractiveTileObject {
 
     @Override
     public void onPlayerContact() {
-       man.manReset();
     }
 
     @Override

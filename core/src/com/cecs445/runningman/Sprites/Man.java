@@ -36,7 +36,6 @@ public class Man extends Sprite{
     private float stateTimer;
     private boolean runningRight;
 
-
     public Man(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("man"));
         this.world = world;
@@ -137,6 +136,7 @@ public class Man extends Sprite{
         pshape.setAsBox(5 / RunningMan.PPM, 13 / RunningMan.PPM, new Vector2(0, 8 / RunningMan.PPM), 0);
         fdef.shape = pshape;
         b2body.createFixture(fdef).setUserData("foot");
+
     }
 
     public void slowTrigger(){
@@ -157,9 +157,9 @@ public class Man extends Sprite{
 //    }
 
     public void manReset(){
-
-        b2body.setTransform(new Vector2(32 / RunningMan.PPM, 32/ RunningMan.PPM), b2body.getAngle());
-
+//        world.destroyBody(b2body);
+//        defineMan();
+        b2body.setTransform(32 / RunningMan.PPM, 32/ RunningMan.PPM, 0);
     }
 
     public void SpeedPower(){}

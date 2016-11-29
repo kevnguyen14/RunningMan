@@ -27,6 +27,7 @@ import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Scenes.EndHud;
 import com.cecs445.runningman.Scenes.Hud;
 import com.cecs445.runningman.Sprites.Man;
+import com.cecs445.runningman.Sprites.Warp;
 import com.cecs445.runningman.Tools.BoxWorldCreator;
 import com.cecs445.runningman.Tools.worldContactListener;
 
@@ -198,6 +199,12 @@ public class PlayScreen implements Screen{
             hud.destroyHud();
             deathHandler();
         }
+
+        //portal check
+//        if(Warp.portal == true)
+//            man.manReset();
+        if(man.b2body.getPosition().x > 24.6 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
+            man.manReset();
 
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;
