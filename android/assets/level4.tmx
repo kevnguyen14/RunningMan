@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="351">
+ <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
+  <image source="../../graphics/tiles/floor_tile_d.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="10" name="bricks" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9" columns="3">
+  <image source="../../graphics/tiles/floor_tile_bd.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="19" name="bg" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="276" columns="23">
+  <image source="../../graphics/bg/bgresized.jpg" width="416" height="221"/>
+ </tileset>
+ <tileset firstgid="295" name="obstacles" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="graphics/obstacle/fire.png" width="16" height="20"/>
+ </tileset>
+ <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="6" columns="0">
+  <tile id="0">
+   <image width="16" height="16" source="graphics/pickup/health.png"/>
+  </tile>
+  <tile id="1">
+   <image width="16" height="15" source="graphics/pickup/jump.png"/>
+  </tile>
+  <tile id="2">
+   <image width="16" height="15" source="graphics/pickup/speed.png"/>
+  </tile>
+  <tile id="3">
+   <image width="10" height="16" source="graphics/pickup/time.png"/>
+  </tile>
+  <tile id="4">
+   <image width="16" height="13" source="graphics/portal/key.png"/>
+  </tile>
+  <tile id="5">
+   <image width="16" height="13" source="graphics/pickup/key.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="302" name="warp" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+  <image source="graphics/portal/portal.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="318" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+  <image source="graphics/portal/portal-lock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="334" name="quicksand" tilewidth="16" tileheight="16" tilecount="16" columns="4">
+  <image source="graphics/tiles/quicksand.png" width="64" height="64"/>
+ </tileset>
+ <layer name="tiles" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt03f0T3Ucx/Hfj/IjpT/KiERLRXZmlAoNKhmZJVGShJaRnU17iUrZKikKES2roYxol1FaZsosPA7dc36nc/LXvee453zO+T7Od53zPK9z7nlnZWRkZAVBkFoncTL5KUBBCnEKhSnCqRTlNIpRnNM5gzM5i7NjbpXgHM7lvNAO7RS2k9wS3W9JSnE+pSlDWcpRngpU5AIqUZkqVKUa1bmQGjG3anIRF1MrtEM7he0kt0T3ewmXchm1qUNdLucKruQq6lGfq7mGa2nAdTSkUcytxjThepqGdminsJ3kluh+m9GcFrSkFTdwI625iTbcTFvacQu30p7b6MDtMbc6cgeduDO0QzuF7SS3RPfbmS505S7u5h7u5T660Z0e9OR+etGbPvSlH/1jbg3gAQYyKLRDO4XtJLdE9zuYIQxlGMMZwUge5CEe5hEe5TEe5wme5CmeZlTMrWcYzRieDe3QTmE7yS3R/T7H84zlBV5kHOOZwEQmMZkpTOUlXuYVpvEq02NuvcbrzGBmaId2CttJbonu9w3eZBazmcNbzGUebzOfBbzDu7zH+3zAQhaxOObWEpbyIR+FdminsJ3kluh+P+YTlvEpn7GcFaxkFZ+zmjV8wZd8xdd8w7d8F3Pre35gLetCO7RT2E5yS3S/69nAj/zERn7mF37lN35nE5vZwla2sZ0/2MGfMbf+Yie72B3aoZ3CdpJbovvdw1728Tf/sJ8DZGR6kYOcHMOx5CKL3OThOPJmxts6nhPIx4mhHdopbCe5Jetw4tB7bvL8+z0HObN9PtJv2f/7r8zgqJP9OQZHv/+7regZHgQhnC6i
+  </data>
+ </layer>
+ <layer name="ground" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztmdtOwzAMhpuL3Q7Bg43DYBsD3v81MBJIjVXHh8RpM/xJUVKtbRy3vx130xQEwa2zh3Y360u/LZ3jZc+WGcHGUQnf6riH9jDrS78tneNlz5YZwcbWcDG8le7+o29rkOTWnjFxhPjbcz+yFbgYXqu7NfZ6t4Akt9Y8m91v+4N7PiPE3577EYre77cl/2o0ucZeL+DB+uWez0jxd00be7/flvzbQpM7ogU+YP9a82/r9xPPxx1LsNhIzVvb16yjZJ/0fMl1FttCv33h9LvW/gjPxx33tqO2p+5fa5/0fMl1LXwc+l2G8gsX97j42Nrf0jpMm5e898LausBqj3SdnJ+8vzP/cEjT9AjtKeXj50RfE/pdZhT9SuswbV7yzr/afYfVHuk6OT95fWee8wI6PUJ7Tfn4LfQrhtLfEfnTWn9w9S8V7/H80vylzSvafO5dl1L3OYEPztAuKR+/o7F0ndr8avl/h/NNaU0Uod8cSr9n5M9W+pXWcXh+af7S5hVtPveuS6n7XMEHH9A+Uz7+QmPpOrX51fItmfNNaU0Uod8gCLbON/IZMd0=
+  </data>
+ </layer>
+ <layer name="fire" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKwDAIBMD0Nf3/D3tOoRBoiJrMgGc9uGhrAAAAAAAA+7mvvoA65BeAKG4PJxnd97+/2apcvftk+ym/5sk2JzVE53f23mbPhfwCzPUAPZ0JEQ==
+  </data>
+ </layer>
+ <layer name="pickups" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt2csNgzAMAFC6TSndASQqgVT2n4cc4MCJTyFNxHsDBMdYtqwUBQBHPR//jgAAOMocB2CLMtK8eP/wnVeGM63aGHPMu8X61wB3tNb3U5tlqcWTMrkCrlKH/tLoMUz27muxd0775FIb8vGRk0t532B2di104bxefS3YecjFN9TqoF6BjIz/MgVf
+  </data>
+ </layer>
+ <objectgroup name="ground" offsetx="0" offsety="-0.666667">
+  <object id="83" x="0" y="17" width="15" height="174"/>
+  <object id="86" x="0" y="0" width="3823.69" height="15.1515"/>
+  <object id="87" x="3823.33" y="0" width="17.3333" height="191"/>
+  <object id="90" x="0" y="191.5" width="974.985" height="17"/>
+  <object id="91" x="975.75" y="191.5" width="2864.5" height="17"/>
+  <object id="284" x="161" y="16.6667" width="62" height="62"/>
+  <object id="285" x="274" y="17.6667" width="95" height="31"/>
+  <object id="286" x="308" y="41.6667" width="30" height="38"/>
+  <object id="287" x="162" y="162.667" width="94" height="29"/>
+  <object id="288" x="194" y="130.667" width="30" height="34"/>
+  <object id="289" x="290" y="129.667" width="65" height="31"/>
+  <object id="290" x="321" y="161.667" width="64" height="32"/>
+  <object id="291" x="417" y="130.667" width="94" height="30"/>
+  <object id="292" x="478" y="97.6667" width="32" height="37"/>
+  <object id="293" x="546" y="66.6667" width="30" height="126"/>
+  <object id="294" x="610" y="65.6667" width="61" height="61"/>
+  <object id="295" x="610" y="162.667" width="127" height="34"/>
+  <object id="296" x="738" y="14.6667" width="29" height="96"/>
+  <object id="297" x="739" y="80.6667" width="59" height="32"/>
+  <object id="298" x="833" y="161.667" width="68" height="30"/>
+  <object id="299" x="866" y="132.667" width="60" height="25"/>
+  <object id="300" x="991" y="129.667" width="65" height="62"/>
+  <object id="301" x="1090" y="98.6667" width="29" height="92"/>
+  <object id="302" x="1119" y="162.667" width="31" height="29"/>
+  <object id="303" x="1154" y="98.6667" width="30" height="29"/>
+  <object id="304" x="1217" y="98.6667" width="29" height="92"/>
+  <object id="305" x="1183" y="160.667" width="38" height="32"/>
+  <object id="306" x="1313" y="161.667" width="253" height="29"/>
+  <object id="307" x="1391" y="17.6667" width="34" height="63"/>
+  <object id="308" x="1423" y="50.6667" width="32" height="61"/>
+  <object id="309" x="1600" y="130.667" width="30" height="61"/>
+  <object id="310" x="1634" y="98.6667" width="29" height="61"/>
+  <object id="311" x="1698" y="97.6667" width="287" height="30"/>
+  <object id="312" x="1922" y="67.6667" width="28" height="29"/>
+  <object id="313" x="1794" y="113.667" width="29" height="77"/>
+  <object id="314" x="1762" y="162.667" width="96" height="27"/>
+  <object id="315" x="2017" y="98.6667" width="32" height="91"/>
+  <object id="316" x="2019" y="162.667" width="59" height="29"/>
+  <object id="317" x="2113" y="161.667" width="93" height="27"/>
+  <object id="318" x="2147" y="131.667" width="94" height="27"/>
+  <object id="319" x="2273" y="98.6667" width="31" height="93"/>
+  <object id="320" x="2290" y="129.667" width="46" height="29"/>
+  <object id="321" x="2369" y="33.6667" width="62" height="62"/>
+  <object id="322" x="2466" y="99.6667" width="62" height="28"/>
+  <object id="323" x="2497" y="35.6667" width="29" height="81"/>
+  <object id="324" x="2367" y="161.667" width="96" height="30"/>
+  <object id="325" x="2401" y="132.667" width="32" height="37"/>
+  <object id="326" x="2578" y="66.6667" width="93" height="32"/>
+  <object id="327" x="2641" y="76.6667" width="28" height="52"/>
+  <object id="328" x="2577" y="161.667" width="127" height="30"/>
+  <object id="329" x="2752" y="50.6667" width="95" height="30"/>
+  <object id="330" x="2786" y="15.6667" width="31" height="48"/>
+ </objectgroup>
+ <objectgroup name="fire">
+  <object id="201" x="1246.56" y="174.424" width="64.8788" height="15.8182"/>
+  <object id="202" x="1631.23" y="160.424" width="66.8788" height="30.8182"/>
+  <object id="203" x="1150.23" y="160.424" width="32.8788" height="30.8182"/>
+  <object id="204" x="1566.89" y="143.424" width="31.8788" height="45.8182"/>
+  <object id="244" x="897" y="159" width="65.5" height="30"/>
+  <object id="245" x="735.5" y="161" width="30" height="30.5"/>
+  <object id="247" x="2304.5" y="161" width="64.5" height="30"/>
+  <object id="248" x="2577" y="97" width="66" height="31.5"/>
+  <object id="249" x="2207.5" y="161" width="65.5" height="29.5"/>
+ </objectgroup>
+ <objectgroup name="teleport" visible="0"/>
+ <objectgroup name="key">
+  <object id="258" x="914" y="82" width="13" height="11"/>
+ </objectgroup>
+ <objectgroup name="door">
+  <object id="232" x="2848.5" y="128.5" width="31" height="62.5"/>
+ </objectgroup>
+ <objectgroup name="slow">
+  <object id="218" x="766.18" y="159.182" width="64.6364" height="16"/>
+  <object id="348" x="256" y="162" width="64" height="30"/>
+  <object id="349" x="1858" y="162" width="156" height="28"/>
+  <object id="350" x="2705" y="129" width="113" height="63"/>
+ </objectgroup>
+ <objectgroup name="health">
+  <object id="237" x="433" y="160.5" width="15" height="14"/>
+  <object id="240" x="1555" y="16" width="11.5" height="12.5"/>
+  <object id="331" x="2529" y="160" width="18" height="17"/>
+  <object id="332" x="1848" y="55"/>
+ </objectgroup>
+ <objectgroup name="speed">
+  <object id="333" x="119" y="187"/>
+  <object id="334" x="445" y="120"/>
+  <object id="335" x="1014" y="120"/>
+  <object id="336" x="1161" y="91"/>
+  <object id="337" x="1483" y="153"/>
+  <object id="338" x="2038" y="90"/>
+  <object id="339" x="2216" y="120"/>
+ </objectgroup>
+ <objectgroup name="time">
+  <object id="344" x="1877" y="88" width="2"/>
+  <object id="345" x="1880" y="88"/>
+  <object id="346" x="1319" y="156"/>
+  <object id="347" x="313" y="121"/>
+ </objectgroup>
+ <objectgroup name="jump">
+  <object id="340" x="2472" y="89"/>
+  <object id="341" x="1766" y="154"/>
+  <object id="342" x="1130" y="152"/>
+  <object id="343" x="504" y="88"/>
+ </objectgroup>
+</map>

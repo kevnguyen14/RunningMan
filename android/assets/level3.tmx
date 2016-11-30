@@ -141,10 +141,9 @@
   <object id="335" x="2128" y="164" width="17.3333" height="10.6667"/>
   <object id="336" x="1089" y="146" width="30" height="14"/>
  </objectgroup>
- <objectgroup name="teleport" visible="0">
+ <objectgroup name="teleport">
   <object id="222" x="1600" y="15.6364" width="16.5455" height="32.5455"/>
   <object id="225" x="1696.18" y="160.182" width="16" height="31.4545"/>
-  <object id="231" x="2449.5" y="66" width="31.5" height="61.5"/>
  </objectgroup>
  <objectgroup name="key">
   <object id="258" x="914" y="82" width="13" height="11"/>
