@@ -3,6 +3,7 @@ package com.cecs445.runningman;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,7 +21,8 @@ public class RunningMan extends Game {
 	public static final short DestroyedBit = 4;
 
 	//creating sound variables
-	public static Sound collision, death, jump, backgroundMusic, portal, fire, time, feather, heart, buttonselect, sand, door, key;
+	public static Sound collision, death, jump, portal, fire, time, feather, heart, buttonselect, sand, door, key;
+	public static Music backgroundMusic;
 
 	public SpriteBatch batch;
 
@@ -30,7 +32,7 @@ public class RunningMan extends Game {
 		collision = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/collision.mp3"));
 		jump = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/jump.mp3"));
 		death = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/death.mp3"));
-		backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/bg_music.mp3"));
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("graphics/sound/bg_music.mp3"));
 		portal = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/portal.mp3"));
 		fire = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/fire.mp3"));
 		time = Gdx.audio.newSound(Gdx.files.internal("graphics/sound/time.mp3"));
