@@ -66,8 +66,10 @@ public class LevelCompleteScreen implements Screen{
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.justTouched())
+        if(Gdx.input.justTouched()) {
+            RunningMan.backgroundMusic.stop();
             game.setScreen(new TitleScreen(this.game));
+        }
     }
 
     public void update(float dt) {

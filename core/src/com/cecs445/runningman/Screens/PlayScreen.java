@@ -127,9 +127,6 @@ public class PlayScreen implements Screen{
 
         //creating ground body/fixtures
 
-
-
-
         world.setContactListener(new worldContactListener());
 
     }
