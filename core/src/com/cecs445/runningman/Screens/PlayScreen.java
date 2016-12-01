@@ -3,6 +3,7 @@ package com.cecs445.runningman.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -62,6 +63,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(RunningMan game, int level){
         this.game = game;
+
         atlas = new TextureAtlas("Man.pack");
 
         Gdx.input.setCatchBackKey(true);
@@ -77,6 +79,8 @@ public class PlayScreen implements Screen{
 
         //load map and setup our map renderer
         mapLoader = new TmxMapLoader();
+
+        RunningMan.backgroundMusic.play();
 
         switch(level){
             case 1:
@@ -137,51 +141,47 @@ public class PlayScreen implements Screen{
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && man.b2body.getLinearVelocity().y == 0)
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && man.b2body.getLinearVelocity().y == 0) {
             man.b2body.applyLinearImpulse(new Vector2(0, 3.5f), man.b2body.getWorldCenter(), true); //applying vertical force in y direction, force applied on the bodys center
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
+            RunningMan.jump.play();
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && man.b2body.getLinearVelocity().x <= 2)
             man.b2body.applyLinearImpulse(new Vector2(man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
+        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && man.b2body.getLinearVelocity().x >= -2)
             man.b2body.applyLinearImpulse(new Vector2(-man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
 
 
         //controller inputs
-        if(hud.isRightPressed())
+        if(hud.isRightPressed()) {
             man.b2body.applyLinearImpulse(new Vector2(man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
-        if(hud.isLeftPressed())
+            if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0 && Gdx.input.justTouched()){
+                man.b2body.applyLinearImpulse(new Vector2(0, man.jumpPower), man.b2body.getWorldCenter(), true);
+                RunningMan.jump.play();
+            }
+        }
+        else if(hud.isLeftPressed()) {
             man.b2body.applyLinearImpulse(new Vector2(-man.movementSpeed, 0), man.b2body.getWorldCenter(), true);
-        if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0) {
+            if(hud.isJumpPressed() && man.b2body.getLinearVelocity().y == 0 && Gdx.input.justTouched()){
+                man.b2body.applyLinearImpulse(new Vector2(0, man.jumpPower), man.b2body.getWorldCenter(), true);
+                RunningMan.jump.play();
+            }
+        }
+
+        else if(man.b2body.getLinearVelocity().y == 0 && hud.isJumpPressed()) {
             man.b2body.applyLinearImpulse(new Vector2(0, man.jumpPower), man.b2body.getWorldCenter(), true);
-            man.damageTrigger();
+            RunningMan.jump.play();
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        else if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
             game.setScreen(new TitleScreen(this.game));
+            RunningMan.backgroundMusic.stop();
         }
-//        if(Gdx.input.isTouched(1) && man.b2body.getLinearVelocity().y == 0) {
-//            //jump
-//            if(Gdx.input.getX(1) >=1621  && Gdx.input.getX(1) <= 1815 && Gdx.input.getY(1) >= 740  && Gdx.input.getY(1) <=  935) {
-//                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
-//        }
-//
-//        if(Gdx.input.isTouched(0)) {
-//            gamecam.unproject(touchPos.set(Gdx.input.getX(0), Gdx.input.getY(0), 0));
-//            Gdx.app.log("Touch pos X: ", touchPos.x + " " + "Touch pos Y: " + touchPos.y + " ");
-//            //moving right touchscreen
-//            if(Gdx.input.getX(0) >= 310 && Gdx.input.getX(0) <= 445 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x <= 2 )
-//                man.b2body.applyLinearImpulse(new Vector2(0.1f, 0), man.b2body.getWorldCenter(), true);
-//            //moving left touchscreen
-//            if(Gdx.input.getX(0) >= 70 && Gdx.input.getX(0) <= 220 && Gdx.input.getY(0) >= 770  && Gdx.input.getY(0) <= 870 && man.b2body.getLinearVelocity().x >= -2)
-//                man.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), man.b2body.getWorldCenter(), true);
-//            if(Gdx.input.getX(0) >=1621  && Gdx.input.getX(0) <= 1815 && Gdx.input.getY(0) >= 740  && Gdx.input.getY(0) <=  935 && man.b2body.getLinearVelocity().y == 0) {
-//                man.b2body.applyLinearImpulse(new Vector2(0, 4f), man.b2body.getWorldCenter(), true);}
-//        }
-
     }
 
     public void deathHandler() {
-        if(Gdx.input.justTouched())
+        if(Gdx.input.justTouched()) {
             game.setScreen(new TitleScreen(this.game));
+        }
     }
 
     public void update(float dt) {
@@ -194,16 +194,12 @@ public class PlayScreen implements Screen{
         hud.setHealth(man.playerHealth);
         // death beneath tile floors
         if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
-            //set to game over screen
-//            game.setScreen(new TitleScreen(this.game));
             hud.destroyHud();
             deathHandler();
+            RunningMan.backgroundMusic.stop();
         }
 
-        //portal check
-//        if(Warp.portal == true)
-//            man.manReset();
-        if(man.b2body.getPosition().x > 24.6 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
+        if(man.b2body.getPosition().x > 24.5 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
             man.manReset();
 
         //everytime man moves, track with game cam only on x axis
@@ -214,6 +210,7 @@ public class PlayScreen implements Screen{
 
     @Override
     public void render(float delta) {
+
         //separate our update logic from render
         update(delta);
 
@@ -225,7 +222,7 @@ public class PlayScreen implements Screen{
         renderer.render(); //draws tile map
 
         //renderer our Box2DDebugLines
-        b2dr.render(world, gamecam.combined);
+//        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
@@ -235,9 +232,13 @@ public class PlayScreen implements Screen{
         //set our batch to now draw what the Hud camera sees
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        hud.setInput();
 
         if(man.getY() < 0 || hud.health <= 0 || hud.worldTimer <= 0) {
+            game.batch.setProjectionMatrix(endHud.stage.getCamera().combined);
             endHud.stage.draw();
+            endHud.setEndHudInput();
+            RunningMan.backgroundMusic.stop();
         }
     }
 

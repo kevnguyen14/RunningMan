@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cecs445.runningman.RunningMan;
+import com.cecs445.runningman.Screens.PlayScreen;
 
 /**
  * Created by Christian on 10/31/2016.
@@ -23,6 +24,7 @@ public class Fire extends InteractiveTileObject {
     @Override
     public void onPlayerContact() {
         man.damageTrigger();
+        RunningMan.fire.play();
     }
 
     @Override

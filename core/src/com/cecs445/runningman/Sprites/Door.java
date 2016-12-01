@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Screens.LevelCompleteScreen;
+import com.cecs445.runningman.Screens.PlayScreen;
 import com.cecs445.runningman.Screens.TitleScreen;
 
 /**
@@ -27,7 +28,10 @@ public class Door extends InteractiveTileObject{
     public void onPlayerContact() {
         if (man.hasKey){
             game.setScreen(new LevelCompleteScreen(this.game));
+            RunningMan.door.play();
         }
+        else
+            RunningMan.collision.play();
     }
 
     @Override

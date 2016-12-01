@@ -133,7 +133,7 @@ public class Man extends Sprite{
         b2body.createFixture(fdef).setUserData("player");
         // create head
         PolygonShape pshape = new PolygonShape();
-        pshape.setAsBox(5 / RunningMan.PPM, 13 / RunningMan.PPM, new Vector2(0, 8 / RunningMan.PPM), 0);
+        pshape.setAsBox(4 / RunningMan.PPM, 13 / RunningMan.PPM, new Vector2(0, 8/ RunningMan.PPM), 0);
         fdef.shape = pshape;
         b2body.createFixture(fdef).setUserData("foot");
 

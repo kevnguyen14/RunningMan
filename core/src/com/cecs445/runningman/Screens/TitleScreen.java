@@ -120,39 +120,6 @@ public class TitleScreen implements Screen{
         stage.addActor(table);
     }
 
-    public void handleInput(float dt){
-//        if(Gdx.input.isTouched()){
-//            float y = Gdx.input.getY();
-//            if (y < (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3))){
-//                game.setScreen(new PlayScreen(this.game));
-//            }
-//            if (y > (viewport.getScreenHeight() - 2*(viewport.getScreenHeight()/3)) && y < (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
-////                game.setScreen(new PlayScreen(this.game));
-//            }
-//            if (y > (viewport.getScreenHeight() - (viewport.getScreenHeight()/3))){
-//                System.exit(0);
-//            }
-//        }
-
-        //play button
-        if(isPlayPressed())
-            game.setScreen(new LevelScreen(this.game));
-        //connect button
-        /**
-         * Hilario code for sign in api
-         */
-        //exit button
-        if(isExitPressed())
-            System.exit(0);
-
-    }
-
-    public void update(float dt) {
-        handleInput(dt);
-
-
-    }
-
     @Override
     public void show() {
 
@@ -161,7 +128,6 @@ public class TitleScreen implements Screen{
     @Override
     public void render(float delta) {
         update(delta);
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(stage.getCamera().view);
         stage.act(delta);
@@ -169,6 +135,32 @@ public class TitleScreen implements Screen{
         stage.getBatch().draw(bg, 0, 0, RunningMan.V_WIDTH, RunningMan.V_HEIGHT);
         stage.getBatch().end();
         stage.draw();
+        setInput();
+    }
+
+    public void update(float dt) {
+        handleInput(dt);
+    }
+
+    public void handleInput(float dt){
+
+        //play button
+        if(isPlayPressed()) {
+            game.setScreen(new LevelScreen(this.game));
+            RunningMan.buttonselect.play();
+        }
+        //connect button
+        else if(isConnectPressed()) {
+            /**
+             * Hilario code for sign in api
+             */
+
+        }
+        //exit button
+        else if(isExitPressed()) {
+            RunningMan.buttonselect.play();
+            System.exit(0);
+        }
     }
 
     @Override
@@ -206,5 +198,9 @@ public class TitleScreen implements Screen{
 
     public boolean isConnectPressed(){
         return connectPressed;
+    }
+
+    public void setInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 }

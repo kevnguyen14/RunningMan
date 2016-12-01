@@ -44,7 +44,6 @@ project(":desktop") {
 
 project(":android") {
     apply plugin: "android"
-
     configurations { natives }
 
     dependencies {
@@ -63,7 +62,6 @@ project(":android") {
 project(":core") {
     apply plugin: "java"
 
-
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
@@ -73,3 +71,6 @@ project(":core") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+
+//apply plugin:
+//        'com.google.gms.google-services'

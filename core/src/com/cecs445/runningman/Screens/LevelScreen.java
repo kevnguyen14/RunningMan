@@ -184,6 +184,7 @@ public class LevelScreen implements Screen{
         myStage.getBatch().draw(bg, 0, 0, RunningMan.V_WIDTH, RunningMan.V_HEIGHT);
         myStage.getBatch().end();
         myStage.draw();
+        setInput();
     }
 
     public void update(float dt) {
@@ -192,18 +193,21 @@ public class LevelScreen implements Screen{
     }
 
     public void handleInput(float dt) {
-        if (exitPress == true) {
+        if (exitPress) {
             game.setScreen(new TitleScreen(this.game));
+            RunningMan.buttonselect.play();
         }
 
-        if (onePress) {
+        else if (onePress) {
             level = 1;
             game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
         }
 
-        if(twoPress == true) {
+        else if(twoPress) {
             level = 2;
             game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
         }
 
         //Crashes the game when this button is pressed
@@ -273,6 +277,10 @@ public class LevelScreen implements Screen{
 
     public static int getLevel() {
         return level;
+    }
+
+    public void setInput() {
+        Gdx.input.setInputProcessor(myStage);
     }
 }
 

@@ -34,7 +34,6 @@ public class EndHud {
         hudCam = new OrthographicCamera();
         viewport = new FitViewport(RunningMan.V_WIDTH, RunningMan.V_HEIGHT, hudCam);
         stage = new Stage(viewport, sb);
-        Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.center(); //top of screen
@@ -62,5 +61,13 @@ public class EndHud {
 
     public void resize(int width, int height){
         viewport.update(width, height);
+    }
+
+    public void setEndHudInput() {
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    public void destroy() {
+        stage.dispose();
     }
 }

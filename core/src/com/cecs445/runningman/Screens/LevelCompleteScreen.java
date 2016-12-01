@@ -91,6 +91,7 @@ public class LevelCompleteScreen implements Screen{
         stage.getBatch().draw(bg, 0, 0, RunningMan.V_WIDTH, RunningMan.V_HEIGHT);
         stage.getBatch().end();
         stage.draw();
+        setInput();
     }
 
     @Override
@@ -116,5 +117,9 @@ public class LevelCompleteScreen implements Screen{
     @Override
     public void dispose() {
 
+    }
+
+    public void setInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 }

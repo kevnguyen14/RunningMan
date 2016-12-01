@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.cecs445.runningman.RunningMan;
 import com.cecs445.runningman.Screens.PlayScreen;
 
 /**
@@ -23,6 +24,7 @@ public class Warp extends InteractiveTileObject {
 
     @Override
     public void onPlayerContact() {
+        RunningMan.portal.play();
     }
 
     @Override
