@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="273">
+ <tileset firstgid="1" name="ground" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9">
+  <image source="../../graphics/tiles/floor_tile_d.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="10" name="bricks" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="9">
+  <image source="../../graphics/tiles/floor_tile_bd.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="19" name="bg" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="276">
+  <image source="../../graphics/bg/bgresized.jpg" width="416" height="221"/>
+ </tileset>
+ <tileset firstgid="295" name="obstacles" tilewidth="16" tileheight="16" tilecount="1">
+  <image source="graphics/obstacle/fire.png" width="16" height="20"/>
+ </tileset>
+ <tileset firstgid="296" name="pickups" tilewidth="32" tileheight="26" tilecount="6">
+  <tile id="0">
+   <image width="16" height="16" source="graphics/pickup/health.png"/>
+  </tile>
+  <tile id="1">
+   <image width="16" height="15" source="graphics/pickup/jump.png"/>
+  </tile>
+  <tile id="2">
+   <image width="16" height="15" source="graphics/pickup/speed.png"/>
+  </tile>
+  <tile id="3">
+   <image width="10" height="16" source="graphics/pickup/time.png"/>
+  </tile>
+  <tile id="4">
+   <image width="16" height="13" source="graphics/portal/key.png"/>
+  </tile>
+  <tile id="5">
+   <image width="16" height="13" source="graphics/pickup/key.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="302" name="warp" tilewidth="16" tileheight="16" tilecount="16">
+  <image source="graphics/portal/portal.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="318" name="portal-lock" tilewidth="16" tileheight="16" tilecount="16">
+  <image source="graphics/portal/portal-lock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="334" name="quicksand" tilewidth="16" tileheight="16" tilecount="16">
+  <image source="graphics/tiles/quicksand.png" width="64" height="64"/>
+ </tileset>
+ <layer name="tiles" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt1Vf0z3Ucx/HfD/nLKBIiFVIXFErR0KCMMkpSiUqhhbaGtNBUaEhRhAgZaWqZSckoldGepCFKKVqPc/I9fzc653NO5zid3t9zHud8Lr7neT43r/MpyOVy+RDCf1IBtajNfuxPHepSjwM4kPocxME0oCGHcCiHcTiNOIIjOYqjox3taCe1U3rZfhvThGM4lqY0ozktOI7jaUkrWtOGEziRtpxEO06mPadwarSjHe2kdkov2+9pdOB0OtKJMziTs+jM2ZxDF7rSjXM5j/O5gAvpTg96clG0ox3tpHZKL9vvxVzCpVzG5VxBL67kKq7mGnpzLX24juu5gRu5ib70oz83Rzva0U5qp/Sy/d7CrdzG7dzBAO7kLgYyiMHczT3cy30M4X6G8gAPMozhPBTtaEc7qZ3Sy/b7MCMYySOMYjRjeJSxjOMxxjOBiTzOJCYzhak8wTSe5KloRzvaSe2UXrbfp3mGZ3mO6TzPC7zIS7zMDGYyi9nMYS6vMI9Xmc9rvM6CaEc72kntlF623zdYSMktlvAmb7GUt3mHd1nGclawkvd4nw/4kI/4mE/4dKv2IhZHO9rR/sd2Si/b72d8zhd8ySpW8xVr+Jpv+JbvWMv3rGM9P/AjG/iJn9nIL9GOdrST2im9bL+/sonN/Mbv/JErfI/zfixCUYqxA8UpoAQ7UpJSlKYMO7FzftvtP3N/XyDa0Y52YTull9+y37IO5diF8uxKhXzhfndzrkwVdqcqe7Ane1GN6tRgb2qyD/vmt92uSKV8tKMd7a3bKb187v8l+7b3PUL4t/wFlG4keQ==
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="83" x="0" y="17" width="15" height="174"/>
+  <object id="86" x="0" y="0" width="3836.36" height="15.1515"/>
+  <object id="87" x="3824" y="0" width="24" height="191"/>
+  <object id="88" x="3799" y="273.5"/>
+ </objectgroup>
+ <objectgroup name="fire"/>
+ <objectgroup name="teleport"/>
+ <objectgroup name="key"/>
+ <objectgroup name="door"/>
+ <objectgroup name="slow"/>
+ <layer name="pickups" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztw7EJAAAIA7D6/9MuPUIkgSQAAAAAAAAAAAAAAFwzDV8sNmQAAw==
+  </data>
+ </layer>
+ <objectgroup name="health"/>
+ <objectgroup name="speed"/>
+ <objectgroup name="time"/>
+</map>

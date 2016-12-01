@@ -26,7 +26,7 @@ public class LevelScreen implements Screen{
     private Viewport views;
     public OrthographicCamera myCam;
     private Texture bg;
-    private static int level;
+    public static int level;
 
     private boolean onePress, twoPress,threePress, fourPress, fivePress, sixPress, exitPress;
 
@@ -73,65 +73,65 @@ public class LevelScreen implements Screen{
         });
 
         Image levelThreeImage = new Image(new Texture("3.png"));
-        levelOneImage.setSize(100,50);
-        levelOneImage.addListener(new InputListener() {
+        levelThreeImage.setSize(100,50);
+        levelThreeImage.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = true;
+                threePress = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = false;
+                threePress = false;
             }
         });
         Image levelFourImage = new Image(new Texture("4.png"));
-        levelOneImage.setSize(100,50);
-        levelOneImage.addListener(new InputListener() {
+        levelFourImage.setSize(100,50);
+        levelFourImage.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = true;
+                fourPress = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = false;
+                fourPress = false;
             }
         });
 
         Image levelFiveImage = new Image(new Texture("5.png"));
-        levelOneImage.setSize(100,50);
-        levelOneImage.addListener(new InputListener() {
+        levelFiveImage.setSize(100,50);
+        levelFiveImage.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = true;
+                fivePress = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = false;
+                fivePress = false;
             }
         });
 
         Image levelSixImage = new Image(new Texture("6.png"));
-        levelOneImage.setSize(100,50);
-        levelOneImage.addListener(new InputListener() {
+        levelSixImage.setSize(100,50);
+        levelSixImage.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = true;
+                sixPress = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                onePress = false;
+                sixPress = false;
             }
         });
 
@@ -206,6 +206,12 @@ public class LevelScreen implements Screen{
 
         else if(twoPress) {
             level = 2;
+            game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
+        }
+
+        else if(sixPress) {
+            level = 6;
             game.setScreen(new PlayScreen(this.game,level));
             RunningMan.buttonselect.play();
         }

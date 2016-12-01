@@ -89,6 +89,9 @@ public class PlayScreen implements Screen{
             case 2:
                 map = mapLoader.load("level2.tmx");
                 break;
+            case 6:
+                map = mapLoader.load("level6.tmx");
+                break;
         }
 
         renderer = new OrthogonalTiledMapRenderer(map, 1/RunningMan.PPM);
@@ -199,13 +202,45 @@ public class PlayScreen implements Screen{
             RunningMan.backgroundMusic.stop();
         }
 
-        if(man.b2body.getPosition().x > 24.5 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
-            man.manReset();
+        System.out.println(man.b2body.getPosition().x + " " + man.b2body.getPosition().y);
+        //level one warp
+        if(LevelScreen.getLevel() == 1)
+            levelOneWarps();
+
+        //level six warps
+        if(LevelScreen.getLevel() == 6)
+            levelSixWarps();
 
         //everytime man moves, track with game cam only on x axis
         gamecam.position.x = man.b2body.getPosition().x;
+        if(LevelScreen.getLevel() == 6)
+            gamecam.position.y = man.b2body.getPosition().y;
         gamecam.update(); //updates cam after every user input
         renderer.setView(gamecam); //renders what our gamecam can see
+    }
+
+    public void levelOneWarps(){
+        //level one warp
+        if(man.b2body.getPosition().x > 24.5 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
+            man.manReset();
+    }
+
+    public void levelSixWarps(){
+        //level six side warps
+        if(man.b2body.getPosition().x < 0) {
+            man.b2body.setTransform((16*20)/RunningMan.PPM, man.b2body.getPosition().y, 0);
+        }
+
+        if(man.b2body.getPosition().x > 16*20/RunningMan.PPM) {
+            man.b2body.setTransform(0 , man.b2body.getPosition().y, 0);
+        }
+
+        if(man.b2body.getPosition().x > 1.5279071 && man.b2body.getPosition().x < 1.6845737 && man.b2body.getPosition().y >= 3.4249995 && man.b2body.getPosition().y < 4)
+            man.manReset();
+
+        if(man.b2body.getPosition().x > 2.9793448 && man.b2body.getPosition().x < 3.1226783 && man.b2body.getPosition().y >= 6.4 && man.b2body.getPosition().y < 7)
+            man.manReset();
+
     }
 
     @Override
