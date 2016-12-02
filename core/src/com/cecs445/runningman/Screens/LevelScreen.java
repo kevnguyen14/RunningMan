@@ -210,6 +210,24 @@ public class LevelScreen implements Screen{
             RunningMan.buttonselect.play();
         }
 
+        else if(threePress) {
+            level = 3;
+            game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
+        }
+
+        else if(fourPress) {
+            level = 4;
+            game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
+        }
+
+        else if(fivePress) {
+            level = 5;
+            game.setScreen(new PlayScreen(this.game,level));
+            RunningMan.buttonselect.play();
+        }
+
         else if(sixPress) {
             level = 6;
             game.setScreen(new PlayScreen(this.game,level));

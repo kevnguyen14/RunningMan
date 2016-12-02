@@ -89,6 +89,15 @@ public class PlayScreen implements Screen{
             case 2:
                 map = mapLoader.load("level2.tmx");
                 break;
+            case 3:
+                map = mapLoader.load("level3.tmx");
+                break;
+            case 4:
+                map = mapLoader.load("level4.tmx");
+                break;
+            case 5:
+                map = mapLoader.load("level5.tmx");
+                break;
             case 6:
                 map = mapLoader.load("level6.tmx");
                 break;
@@ -204,6 +213,10 @@ public class PlayScreen implements Screen{
         if(LevelScreen.getLevel() == 1)
             levelOneWarps();
 
+        //level two warp
+        if(LevelScreen.getLevel() == 2)
+            levelTwoWarps();
+
         //level six warps
         if(LevelScreen.getLevel() == 6)
             levelSixWarps();
@@ -219,6 +232,12 @@ public class PlayScreen implements Screen{
     public void levelOneWarps(){
         //level one warp
         if(man.b2body.getPosition().x > 24.5 && man.b2body.getPosition().x <24.8 && man.b2body.getPosition().y > 0.8 && man.b2body.getPosition().y < 0.9)
+            man.manReset();
+    }
+
+    public void levelTwoWarps(){
+        //level one warp
+        if(man.b2body.getPosition().x >= 13.4 && man.b2body.getPosition().x <=13.5 && man.b2body.getPosition().y >= 0.21499997 && man.b2body.getPosition().y < 0.8)
             man.manReset();
     }
 
